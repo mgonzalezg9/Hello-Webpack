@@ -11,4 +11,4 @@ Hello Webpack is a simple React webpack application that demonstrates how to use
 - [x] CSS Styling
 - [x] JSX Parsing
 - [x] Production Caching
-- [x] Source map code (commented)
+- [ ] Source map code
