@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #aaa;
+  background: rgb(225, 58, 58);
   display: grid;
   place-content: center;
   min-height: 100vh;

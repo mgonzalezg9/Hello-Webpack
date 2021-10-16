@@ -1,8 +1,9 @@
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 const reactRule = {
   // transpile JSX
-  test: /\.js$/,
+  test: /\.jsx?$/,
   loader: "babel-loader",
   options: {
     presets: [
@@ -23,13 +24,30 @@ const cssRule = {
 
 const rules = [reactRule, cssRule];
 
-module.exports = {
-  // entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, "build"), // directory to put the bundle
-  },
-  module: {
-    // rules for webpack to process files
-    rules,
-  },
+// The export can be either a function or an object.
+module.exports = (env, argv) => {
+  const isProduction = argv.mode === "production";
+
+  return {
+    // entry: './src/index.js',
+    output: {
+      filename: isProduction ? "[name].[contenthash].js" : "[name].js", // production hashing for cache busting
+      path: path.resolve(__dirname, "build"), // directory to put the bundle
+    },
+    plugins: [
+      // Default index file
+      new HtmlWebpackPlugin({
+        template: "src/index.html",
+      }),
+    ],
+    module: {
+      // rules for webpack to process files
+      rules,
+    },
+    devServer: {
+      open: true, // open browser
+      port: 3000, // port to run the server on
+    },
+    // devtool: "source-map", // source map for debugging (increases time)
+  };
 };

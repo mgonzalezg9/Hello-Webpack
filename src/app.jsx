@@ -1,7 +1,7 @@
 import "./styles.css";
 
 const App = () => {
-  return <div>Hello Webpack !</div>;
+  return <div className="container">Hello Webpack !</div>;
 };
 
 export default App;
